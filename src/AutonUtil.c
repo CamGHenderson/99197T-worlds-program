@@ -28,7 +28,7 @@ void adjustRelativeAngle(const double optimalAngle, const double topSpeed, const
 			
 		}
 		
-		// ensure robot is within acceptable error and at rest
+		// ensure robot is within acceptable error and at rest s
 		if(pError < 0.05 && pError > -.05)//be within 5% for 100 ms before break, helps prevent overshoot
 		{
 			restCount++;
