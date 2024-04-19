@@ -1,14 +1,14 @@
 #include "Subsystems.h"
 #include "api.h"
 
-const double directionValues[3] = { 0.0, 1.0, -1.0 };
+const double directionValues[3] = { 0.0, 1.0, -1.0 };//stupid auton stuff DONT TOUCH!!!
 
 const int8_t driveMotors[DRIVE_MOTOR_COUNT] = { 
 											-17, 18, -19, // left motors
 										 	20, -5, 9  // right motors
 										 };
 
-const int8_t* leftDriveMotors = &driveMotors[0];
+const int8_t* leftDriveMotors = &driveMotors[0];//seting the dribe aratys to fucntuin
 const int8_t* rightDriveMotors = &driveMotors[(DRIVE_MOTOR_COUNT / 2)]; 
  
 const int8_t intakeMotors[INTAKE_MOTOR_COUNT] = { 15, -16 };
@@ -26,7 +26,7 @@ void initializeSubsystems()
 		
 		if(port < 0)
 		{
-			port = abs(port);
+			port = abs(port);//stipdi motor no like negative number, make positive then set reversed
 			motor_set_reversed(port, true);
 		}
 		
@@ -53,6 +53,7 @@ void initializeSubsystems()
 	
 	adi_pin_mode('H', INPUT);
 	
+	//set up robot before the program is run
 	imu_reset(leftIMU);
 	imu_reset(rightIMU);
 }

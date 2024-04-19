@@ -7,8 +7,8 @@
 void descoreTriball()
 {
 	double iDistance = getRightDistance();
-	double target = 14.0;
-	double pError = 1.0;
+	double target = 14.0;//inches
+	double pError = 1.0;//percent error
 	
 	const double max = 80.0;
 	const double min = 30.0;
@@ -16,32 +16,31 @@ void descoreTriball()
 	uint16_t count = 0;
 
 	moveWings(RIGHT_WING, OPEN);
-	while(pError > .05 || pError < -.05)
+	while(pError > .05 || pError < -.05)//if its within 5% of target distance (0.05)
 	{
-		double error = target - (getRightDistance() - iDistance);
+		double error = target - (getRightDistance() - iDistance);//target - change in distance = how far to get to goal
 		pError = (error / target);
-		if(pError > 1.0)
+		if(pError > 1.0)//make sure it doesnt go over 100%
 			pError = 1.0;
 		
-		int16_t speed = (pError * max);
-		if(speed < min)
+		int16_t speed = (pError * max);//speed is voltage, taking max speed and getting part by multoply by percent
+		if(speed < min)//prevents motors from stalling
 			speed = min;
 		
-		if(count >= 1000)
+		if(count >= 1000)//close wing 1 sec (1000ms) after start
 			moveWings(RIGHT_WING, CLOSED);
 		
 		count += LOOP_DELAY;
 		
-		setRightDriveVoltage(speed);
+		setRightDriveVoltage(speed);//setting motors to speed
 		delay(LOOP_DELAY);
 	}
 	
 	setRightDriveVoltage(0);
-	moveWings(RIGHT_WING, CLOSED);
 	delay(750);
 }
 
-void scorePreload()
+void scorePreload()//pretty much sensorless
 {
 	setRightDriveVoltage(-100);
 	setLeftDriveVoltage(-40);

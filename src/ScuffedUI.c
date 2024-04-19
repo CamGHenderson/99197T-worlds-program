@@ -86,7 +86,7 @@ void displayAutoMenu()
   	lv_obj_align(label, NULL, LV_ALIGN_IN_TOP_MID, 0, 5);
  	
  	// TODO wrap buttons into function
- 	// Thanks past me this code is roughly a year old and I still haven't fixed it
+ 	// Thanks past me this code is roughly a year old and I still haven't fixed it //*two years
  	// and I'm still not gonna fix it
   	lv_obj_t* closeAuto = lv_btn_create(lv_scr_act(), NULL);
 	lv_obj_set_size(closeAuto, 200, 50);
@@ -95,7 +95,7 @@ void displayAutoMenu()
 	lv_obj_set_free_num(closeAuto, 1);
 	lv_btn_set_action(closeAuto, LV_BTN_ACTION_CLICK, selectCloseAuto);
 	
-	// TODO fix backwards ui garbage
+  // TODO fix backwards ui garbage
 	lv_obj_t* btn1Label = lv_label_create(closeAuto, NULL);
  	lv_label_set_text(btn1Label, "Descore Auton");
  	
