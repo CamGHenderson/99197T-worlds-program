@@ -15,7 +15,7 @@ void updateChassis()
 	setRightDriveVoltage((int16_t)rSpeed);
 }
 
-void updateIntake()
+void updateIntake()//TODO make toggle
 {
 	Direction dir;
 	if(controller_get_analog(E_CONTROLLER_MASTER, E_CONTROLLER_DIGITAL_R2))
