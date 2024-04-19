@@ -95,7 +95,7 @@ void displayAutoMenu()
 	lv_obj_set_free_num(closeAuto, 1);
 	lv_btn_set_action(closeAuto, LV_BTN_ACTION_CLICK, selectCloseAuto);
 	
-	//todo fix backwarwds ui garmaiange
+  // TODO fix backwards ui garbage
 	lv_obj_t* btn1Label = lv_label_create(closeAuto, NULL);
  	lv_label_set_text(btn1Label, "Descore Auton");
  	
