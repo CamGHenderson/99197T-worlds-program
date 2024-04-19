@@ -55,23 +55,25 @@ void sweepTriballs()
 	
 	delay(250);
 	
-	adjustRelativeAngle(140.0, 50.0, 15.0);
+	// this may be the source of the really fucked bug
+	adjustRelativeAngle(140.0, 80.0, 30.0);
 	
 	moveWings(BOTH_WINGS, OPEN);
 	
+	// add prop controller here
 	setRightDriveVoltage(-40);
 	setLeftDriveVoltage(-40);
 	
-	delay(850);
+	delay(975);
 	
-	moveWings(BOTH_WINGS, CLOSED);
-	
-	adjustRelativeAngle(90.0, 40.0, 15.0);
+	adjustRelativeAngle(90.0, 50.0, 20.0);
 	
 	setRightDriveVoltage(-100);
-	setLeftDriveVoltage(-100);
+	setLeftDriveVoltage(-127);
 	
-	delay(1000);
+	delay(1100);
+	
+	moveWings(BOTH_WINGS, CLOSED);
 	
 	setRightDriveVoltage(0);
 	setLeftDriveVoltage(0);

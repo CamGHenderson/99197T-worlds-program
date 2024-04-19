@@ -82,12 +82,14 @@ void runDriverControl()
 				runFarSideAuton();
 			else
 				runFarSideAuton();
+				
+			//runDescoreAuton();
 		}
 		
 		updateChassis();
 		updateIntake();
 		updateWings();
-		//updateLift();
+		updateLift();
 		
 		delay(LOOP_DELAY);
 	}

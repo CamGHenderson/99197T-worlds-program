@@ -16,7 +16,7 @@ const char wings[2] = { 'A', 'B' };
 const int8_t lift = 'C';
 
 const uint8_t leftIMU = 11;
-const uint8_t rightIMU = 8;
+const uint8_t rightIMU = 13;
 
 void initializeSubsystems()
 {
@@ -49,11 +49,12 @@ void initializeSubsystems()
 	// initialize wing adi
 	adi_pin_mode('A', OUTPUT);
 	adi_pin_mode('B', OUTPUT);
+	adi_pin_mode('C', OUTPUT);
+	
+	adi_pin_mode('H', INPUT);
 	
 	imu_reset(leftIMU);
 	imu_reset(rightIMU);
-	
-	adi_pin_mode('H', INPUT);
 }
 
 void setDriveSpeed(int16_t speed)

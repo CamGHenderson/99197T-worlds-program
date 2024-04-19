@@ -22,7 +22,11 @@ void adjustRelativeAngle(const double optimalAngle, const double topSpeed, const
 			speed = min * sign;
 
 		double pTorqueAve = abs((getLeftTorque() + getRightTorque()) / 2.0) / maxMotorTorque;
-
+		if(pTorqueAve >= maxMotorTorque && pError < 0.1)
+		{
+			
+		}
+		
 		// ensure robot is within acceptable error and at rest
 		if(pError < 0.05 && pError > -.05)
 		{

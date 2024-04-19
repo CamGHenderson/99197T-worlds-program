@@ -7,7 +7,7 @@
 void descoreTriball()
 {
 	double iDistance = getRightDistance();
-	double target = 10.0;
+	double target = 14.0;
 	double pError = 1.0;
 	
 	const double max = 80.0;
@@ -48,11 +48,11 @@ void scorePreload()
 	
 	delay(400);
 	
-	setRightDriveVoltage(-100);
-	setLeftDriveVoltage(-80);
+	setRightDriveVoltage(-127);
+	setLeftDriveVoltage(-95);
 	
 	// implement imu collision shit here
-	delay(800);
+	delay(1000);
 	
 	setRightDriveVoltage(0);
 	setLeftDriveVoltage(0);
@@ -65,7 +65,7 @@ void waitForWallCollision()
 	double iAngle = getRobotDirection();
 	double currentAngle = iAngle;
 
-	const double variance = 5.0;
+	const double variance = 8.0;
 
 	while(currentAngle < iAngle + variance && currentAngle > iAngle - variance)
 	{
@@ -103,17 +103,16 @@ void waitForBarHit()
 void pushAlleyTriballs()
 {
 	goalSpacingMove();
-	adjustRelativeAngle(200.0, 50.0, 18.0);
-		
+	adjustRelativeAngle(190.0, 50.0, 25.0);
 	driveIntake(BACKWARDS);
 	
 	setRightDriveVoltage(50);
 	setLeftDriveVoltage(50);
-	delay(250);
+	delay(300);
 	
 	waitForWallCollision();
 	
-	adjustRelativeAngle(150.0, 35.0, 18.0);
+	adjustRelativeAngle(150.0, 50.0, 25.0);
 	
 	printRobotDirection();
 	
@@ -125,6 +124,8 @@ void pushAlleyTriballs()
 	setLeftDriveVoltage(20);
 	
 	waitForBarHit();
+	
+	//delay(0);
 	
 	setRightDriveVoltage(0);
 	setLeftDriveVoltage(0);
@@ -141,7 +142,7 @@ void runDescoreAuton()
 	printRobotDirection();
 	
 	delay(250);
-		
+	
 	descoreTriball();
 	scorePreload();
 

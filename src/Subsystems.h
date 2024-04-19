@@ -51,4 +51,3 @@ void setRobotDirection(double dir);
 double getRobotDirection();
 
 bool isArmPressed();
-
