@@ -56,8 +56,10 @@ void updateIntake()//TODO make toggle
 		b = false;
 	}
 	if(b)
+	{
 		dir = BACKWARDS;
 		f = false;
+	}
 		
 	driveIntake(dir);
 }
