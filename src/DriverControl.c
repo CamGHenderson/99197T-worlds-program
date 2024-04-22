@@ -18,12 +18,46 @@ void updateChassis()
 void updateIntake()//TODO make toggle
 {
 	Direction dir;
-	if(controller_get_analog(E_CONTROLLER_MASTER, E_CONTROLLER_DIGITAL_R2))
-		dir = FORWARDS;	
-	else if(controller_get_analog(E_CONTROLLER_MASTER, E_CONTROLLER_DIGITAL_R1))
-		dir = BACKWARDS;
+	
+	static bool down1 = false;
+	static bool down2 = false;
+	
+	static bool f = false;
+	static bool b = false;
+	
+	dir = NONE;
+	if(controller_get_analog(E_CONTROLLER_MASTER, E_CONTROLLER_DIGITAL_R1))
+	{
+		if(!down1)
+		{
+			f = !f;
+			down1 = true;
+		}
+	}
 	else
-		dir = NONE;
+	{
+		down1 = false;
+	}
+		
+	if(controller_get_analog(E_CONTROLLER_MASTER, E_CONTROLLER_DIGITAL_R2))
+	{
+		if(!down2)
+		{
+			b = !b;
+			down2 = true;
+		}
+	}
+	else
+		down2 = false;
+	
+	if(f)
+	{
+		dir = FORWARDS;
+		b = false;
+	}
+	if(b)
+		dir = BACKWARDS;
+		f = false;
 		
 	driveIntake(dir);
 }
@@ -34,12 +68,12 @@ void updateWings()
 	static bool bHold = false;
 
 	if(controller_get_digital(E_CONTROLLER_MASTER, E_CONTROLLER_DIGITAL_L1) ||
-	   controller_get_digital(E_CONTROLLER_MASTER, E_CONTROLLER_DIGITAL_L2))
+	   controller_get_digital(E_CONTROLLER_MASTER, E_CONTROLLER_DIGITAL_A))
 	{
 		if(!bHold)
 		{
 			wingsDown = !wingsDown;
-			if(controller_get_digital(E_CONTROLLER_MASTER, E_CONTROLLER_DIGITAL_L2))
+			if(controller_get_digital(E_CONTROLLER_MASTER, E_CONTROLLER_DIGITAL_A))
 				moveWings(RIGHT_WING, wingsDown);
 			else
 				moveWings(BOTH_WINGS, wingsDown);
@@ -55,7 +89,7 @@ void updateLift()
 {
 	static bool deployed = false;
 	static bool bHold = false;
-	if(controller_get_digital(E_CONTROLLER_MASTER, E_CONTROLLER_DIGITAL_A))
+	if(controller_get_digital(E_CONTROLLER_MASTER, E_CONTROLLER_DIGITAL_UP))
 	{
 		if(!bHold)
 		{
@@ -76,12 +110,12 @@ void runDriverControl()
 		if(controller_get_digital(E_CONTROLLER_MASTER, E_CONTROLLER_DIGITAL_DOWN))
 		{
 			// garbage
-			if(getUISelection() == UI_CLOSE_AUTO)
+			/*if(getUISelection() == UI_CLOSE_AUTO)
 				runDescoreAuton();	
 			else if(getUISelection() == UI_FAR_AUTO)
 				runFarSideAuton();
 			else
-				runFarSideAuton();
+				runFarSideAuton();*/
 				
 			//runDescoreAuton();
 		}

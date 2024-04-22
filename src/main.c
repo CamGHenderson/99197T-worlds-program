@@ -13,10 +13,7 @@ void initialize()
 
 void autonomous()
 {	
-	if(getUISelection() == UI_CLOSE_AUTO)
-		runDescoreAuton();	
-	else if(getUISelection() == UI_FAR_AUTO)
-		runFarSideAuton();
+	runDescoreAuton();
 }
 
 void opcontrol()

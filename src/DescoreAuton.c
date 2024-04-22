@@ -23,7 +23,7 @@ void descoreTriball()
 		if(pError > 1.0)//make sure it doesnt go over 100%
 			pError = 1.0;
 		
-		int16_t speed = (pError * max);//speed is voltage, taking max speed and getting part by multoply by percent
+		int16_t speed = (pError * max);//speed is voltage, taking max speed and getting part by multiply by percent
 		if(speed < min)//prevents motors from stalling
 			speed = min;
 		
@@ -36,6 +36,7 @@ void descoreTriball()
 		delay(LOOP_DELAY);
 	}
 	
+	moveWings(RIGHT_WING, CLOSED);
 	setRightDriveVoltage(0);
 	delay(750);
 }
@@ -137,6 +138,7 @@ void pushAlleyTriballs()
 void runDescoreAuton()
 {
 	setRobotDirection(180);
+	
 
 	printRobotDirection();
 	

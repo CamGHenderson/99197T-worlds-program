@@ -4,84 +4,72 @@
 #include "ProgramArgs.h"
 #include "api.h"
 
-void waitForTriballCollection()
+void descoreFar()
 {
-	while(true)
+	double iDistance = getLeftDistance();
+	double target = 14.0;//inches
+	double pError = 1.0;//percent error
+	
+	const double max = 80.0;
+	const double min = 30.0;
+	
+	uint16_t count = 0;
+
+	moveWings(LEFT_WING, OPEN);
+	
+	delay(1000);
+	
+	while(pError > .05 || pError < -.05)//if its within 5% of target distance (0.05)
 	{
-		if(getIntakeCurrentDraw() > 2360)
-			break;
+		double error = target - (getLeftDistance() - iDistance);//target - change in distance = how far to get to goal
+		pError = (error / target);
+		if(pError > 1.0)//make sure it doesnt go over 100%
+			pError = 1.0;
 		
-		delay(LOOP_DELAY);		
+		int16_t speed = (pError * max);//speed is voltage, taking max speed and getting part by multiply by percent
+		if(speed < min)//prevents motors from stalling
+			speed = min;
+		
+		if(count >= 1000)//close wing 1 sec (1000ms) after start
+			moveWings(LEFT_WING, CLOSED);
+		
+		count += LOOP_DELAY;
+		
+		setLeftDriveVoltage(speed);//setting motors to speed
+		delay(LOOP_DELAY);
 	}
-}
-
-void collectFirstTriball()
-{
-	printRobotDirection();
-
-	driveIntake(FORWARDS);
-	delay(100);
 	
-	setRightDriveVoltage(25);
-	setLeftDriveVoltage(25);
-	
-	waitForTriballCollection();
-	delay(180);
+	moveWings(LEFT_WING, CLOSED);
 	
 	setRightDriveVoltage(0);
-	setLeftDriveVoltage(0);
-	
-	driveIntake(NONE);
-	
-	delay(500);
-	
-	adjustRelativeAngle(185.0, 40, 18.0);
-	
-	delay(500);
-	
-	printRobotDirection();
-}
+	delay(750);
 
-// descore triball (c is angry)
-void sweepTriballs()
+	
+}	
+
+void scorePreloadFar()
 {
+	setLeftDriveVoltage(-100);
 	setRightDriveVoltage(-40);
-	setLeftDriveVoltage(-38);
 	
-	delay(2500);
+	delay(400);
 	
-	setRightDriveVoltage(0);
-	setLeftDriveVoltage(0);
-	
-	delay(250);
-	
-	// this may be the source of the really fucked bug
-	adjustRelativeAngle(140.0, 80.0, 30.0);
-	
-	moveWings(BOTH_WINGS, OPEN);
-	
-	// add prop controller here
-	setRightDriveVoltage(-40);
-	setLeftDriveVoltage(-40);
-	
-	delay(975);
-	
-	adjustRelativeAngle(90.0, 50.0, 20.0);
-	
-	setRightDriveVoltage(-100);
 	setLeftDriveVoltage(-127);
+	setRightDriveVoltage(-95);
 	
-	delay(1100);
-	
-	moveWings(BOTH_WINGS, CLOSED);
+	delay(1000);
 	
 	setRightDriveVoltage(0);
 	setLeftDriveVoltage(0);
+	
+	delay(500);
 }
 
 void runFarSideAuton()
 {
 	setRobotDirection(180.0);
-	collectFirstTriball();
-	sweepTriballs();
+
+	descoreFar();
+
+	//scorePreloadFar();
 }
